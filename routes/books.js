@@ -1,12 +1,20 @@
 const express = require('express');
-const { v4: uuid } = require('uuid')
 const router = express.Router();
 
-let books = [{
-    id: 1,
+let idBook = 0;
+
+let books = [
+  {
+    id: idBook++,
     author: 'John Doe',
     title: 'Javascript Book'
-}]
+  },
+  {
+    id: idBook++,
+    author: 'Kristofer Roben',
+    title: 'Vini Puh'
+  }
+]
 
 // получение всех книг
 router.get('/', (req, res) => {
@@ -28,11 +36,10 @@ router.get('/:id', (req, res) => {
 // добавление книги
 router.post('/', (req, res) => {
     console.log(req.body);
-    console.log('uuid() - ', uuid());
     const book = {
         title: req.body.title || 'Default title',
         author: req.body.author || 'Default author',
-        id: uuid()
+        id: idBook++
     };
 
     books.push(book)
